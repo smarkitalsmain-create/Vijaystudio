@@ -1,10 +1,11 @@
 // Vijyaz Studio — shared behaviour (menu, reveal, marquee, forms)
 
-// Set this to a form backend URL (accepts a JSON POST) to receive enquiries
-// directly. While empty, forms hand the visitor off to WhatsApp or email.
-const FORM_ENDPOINT = "";
+// Enquiries are emailed to the studio through FormSubmit (formsubmit.co), which
+// also sends the visitor a confirmation. If that request fails, the form falls
+// back to handing the visitor off to WhatsApp or email.
 const WHATSAPP_NUMBER = "918824928835";
-const STUDIO_EMAIL = "vijyasartistry@gmail.com";
+const STUDIO_EMAIL = "connect@vijyazstudio.in";
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${STUDIO_EMAIL}`;
 
 document.documentElement.classList.add("js");
 
@@ -92,26 +93,37 @@ const labelFor = (form, field) => {
 document.querySelectorAll("form[data-enquiry]").forEach((form) => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (form.elements._honey?.value) return; // spam bots fill the hidden field
     const lines = [];
     const data = {};
     [...form.elements].forEach((field) => {
-      if (!field.name || field.disabled || (field.type === "radio" && !field.checked)) return;
+      if (!field.name || field.name.startsWith("_") || field.disabled || (field.type === "radio" && !field.checked)) return;
       const value = labelFor(form, field);
       if (!value) return;
-      data[field.name] = value;
+      // FormSubmit needs the visitor's address under "email" to send the confirmation
+      data[field.name === "email" ? "email" : field.dataset.label || field.name] = value;
       lines.push(`${field.dataset.label || field.name}: ${value}`);
     });
     const message = `${form.dataset.enquiry}\n\n${lines.join("\n")}`;
     const done = form.parentElement.querySelector(".handoff");
+    const button = form.querySelector("[type=submit]");
 
     if (FORM_ENDPOINT) {
+      button.disabled = true;
+      button.textContent = "Sending…";
       try {
         const res = await fetch(FORM_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ form: form.dataset.enquiry, ...data }),
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            ...data,
+            _subject: `${form.dataset.enquiry}: ${data.Name || "website"}`,
+            _template: "table",
+            _autoresponse: form.dataset.reply,
+          }),
         });
-        if (!res.ok) throw new Error(String(res.status));
+        const result = await res.json();
+        if (!res.ok || String(result.success) !== "true") throw new Error(result.message || String(res.status));
         done.querySelector("[data-sent]").hidden = false;
         done.querySelector("[data-send]").hidden = true;
         done.querySelector("h3").textContent = "Thank you.";

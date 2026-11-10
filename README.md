@@ -11,4 +11,4 @@ Plain HTML, CSS and JavaScript with no build step.
 
 Preview locally with `node serve.mjs`, then open http://localhost:4173.
 
-Forms hand off to WhatsApp or email until `FORM_ENDPOINT` in `main.js` is set.
+Forms email connect@vijyazstudio.in through FormSubmit, which also sends the visitor a confirmation. If that request fails, the form hands the visitor off to WhatsApp or email.
