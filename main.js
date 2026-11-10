@@ -6,6 +6,7 @@
 const WHATSAPP_NUMBER = "918824928835";
 const STUDIO_EMAIL = "connect@vijyazstudio.in";
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${STUDIO_EMAIL}`;
+const SEND_TIMEOUT_MS = 15000; // after this, stop waiting and offer WhatsApp / email
 
 document.documentElement.classList.add("js");
 
@@ -93,7 +94,6 @@ const labelFor = (form, field) => {
 document.querySelectorAll("form[data-enquiry]").forEach((form) => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (form.elements._honey?.value) return; // spam bots fill the hidden field
     const lines = [];
     const data = {};
     [...form.elements].forEach((field) => {
@@ -114,6 +114,7 @@ document.querySelectorAll("form[data-enquiry]").forEach((form) => {
       try {
         const res = await fetch(FORM_ENDPOINT, {
           method: "POST",
+          signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
             ...data,
@@ -137,6 +138,7 @@ document.querySelectorAll("form[data-enquiry]").forEach((form) => {
       `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(form.dataset.enquiry)}&body=${encodeURIComponent(message)}`;
     form.hidden = true;
     done.hidden = false;
-    done.focus();
+    done.focus({ preventScroll: true });
+    done.scrollIntoView({ block: "center", behavior: "smooth" });
   });
 });
