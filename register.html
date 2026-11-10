@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register | Vijyaz Studio</title>
+<meta name="description" content="Register for a 1-on-1 art session, a DIY kit, a corporate workshop or a retreat with Vijyaz Studio, Jaipur. We follow up with details and pricing.">
+<meta property="og:title" content="Register | Vijyaz Studio">
+<meta property="og:description" content="Register for a 1-on-1 art session, a DIY kit, a corporate workshop or a retreat with Vijyaz Studio, Jaipur. We follow up with details and pricing.">
+<meta property="og:image" content="https://dlrsjvulepdgfqrjjhln.supabase.co/storage/v1/object/public/site-uploads/uploads/workshopmarquee-item-4-1785945149380.jpg">
+<meta name="theme-color" content="#f8f2e7">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Vijyaz Studio, home">
+      <b>Vijyaz <i>•</i> Studio</b>
+      <small>Every creation begins within</small>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="for-you.html">For you</a></li>
+        <li><a href="for-teams.html">For teams</a></li>
+        <li><a href="for-you.html#diy-kits">DIY kits</a></li>
+        <li><a href="index.html#artist">The artist</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-gerua" href="register.html">Book a session <span aria-hidden="true">→</span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  </div>
+</header>
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap split">
+      <div class="split-copy">
+        <p class="eyebrow" style="margin-bottom:0">Registration</p>
+        <h1>Let's make <em class="squiggle">something.</em></h1>
+        <p class="lede">Tell us about the session you have in mind. We'll follow up with the details and the pricing.</p>
+        <ul class="ticks">
+          <li>Led by Vijya, in the room, every time</li>
+          <li>All materials included</li>
+          <li>No experience needed</li>
+        </ul>
+        <div class="contact-list">
+          <span class="note" style="margin:10px 0 0">or reach us directly</span>
+          <a href="tel:+918824928835">+91 88249 28835</a>
+          <a href="mailto:vijyasartistry@gmail.com">vijyasartistry@gmail.com</a>
+          <span>Jaipur, Rajasthan</span>
+        </div>
+      </div>
+
+      <div class="form-card" id="registration-form">
+        <form id="register-form" data-enquiry="New registration">
+          <div class="form-grid">
+            <fieldset class="field full">
+              <legend>Who is this for?</legend>
+              <div class="segmented">
+                <label><input type="radio" name="audience" value="myself" data-label="Booking for" checked>For myself</label>
+                <label><input type="radio" name="audience" value="team" data-label="Booking for">For my team</label>
+              </div>
+            </fieldset>
+            <div class="field"><label for="r-name">Full name *</label><input id="r-name" name="name" data-label="Name" autocomplete="name" required></div>
+            <div class="field"><label for="r-phone">Phone *</label><input id="r-phone" name="phone" data-label="Phone" type="tel" autocomplete="tel" required></div>
+            <div class="field full"><label for="r-email">Email *</label><input id="r-email" name="email" data-label="Email" type="email" autocomplete="email" required></div>
+            <div class="field" data-team-only hidden><label for="r-company">Company</label><input id="r-company" name="company" data-label="Company" autocomplete="organization"></div>
+            <div class="field" data-team-only hidden><label for="r-size">Team size</label><input id="r-size" name="team_size" data-label="Team size" inputmode="numeric" placeholder="e.g. 25"></div>
+            <div class="field">
+              <label for="r-program">Program *</label>
+              <select id="r-program" name="program" data-label="Program" required>
+                <option value="">Select a program</option>
+                <option value="one-on-one">1-on-1 Session</option>
+                <option value="diy-kits">DIY Kits</option>
+                <option value="corporate-workshops">Corporate Workshops</option>
+                <option value="retreat-offsite">Retreat &amp; Offsite</option>
+              </select>
+            </div>
+            <div class="field"><label for="r-date">Preferred date</label><input id="r-date" name="date" data-label="Preferred date" type="date"></div>
+            <div class="field full"><label for="r-notes">Anything else?</label><textarea id="r-notes" name="notes" data-label="Notes"></textarea></div>
+          </div>
+          <button class="btn btn-gerua" type="submit">Submit registration <span aria-hidden="true">→</span></button>
+          <p class="form-note">We reply with details and pricing. Nothing is charged here.</p>
+        </form>
+        <div class="handoff" hidden tabindex="-1">
+          <h3>One last tap.</h3>
+          <p data-sent hidden>Thank you. Your registration is in, and we'll be in touch with details and pricing.</p>
+          <div data-send class="handoff">
+            <p>Your details are ready. Send them to the studio and we'll reply with details and pricing.</p>
+            <div class="btn-row" style="justify-content:center">
+              <a class="btn btn-gerua" data-whatsapp target="_blank" rel="noopener" href="#">Send on WhatsApp</a>
+              <a class="btn btn-ghost" data-email href="#">Send by email</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html">
+          <b>Vijyaz <i>•</i> Studio</b>
+          <small>Every creation begins within</small>
+        </a>
+        <p class="footer-about">Artist-led workshops, private sessions and DIY kits from Jaipur, for one person or a whole company.</p>
+      </div>
+      <div>
+        <h4>For you</h4>
+        <ul>
+          <li><a href="for-you.html#one-on-one">1-on-1 session</a></li>
+          <li><a href="for-you.html#diy-kits">DIY kits</a></li>
+          <li><a href="index.html#artist">Meet Vijya</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>For teams</h4>
+        <ul>
+          <li><a href="for-teams.html#formats">Corporate workshops</a></li>
+          <li><a href="for-teams.html#formats">Retreat &amp; offsite</a></li>
+          <li><a href="for-teams.html#playbook">Free playbook</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Say hello</h4>
+        <ul>
+          <li><a href="tel:+918824928835">+91 88249 28835</a></li>
+          <li><a href="mailto:vijyasartistry@gmail.com">vijyasartistry@gmail.com</a></li>
+          <li><a href="https://instagram.com/vijyas_artistry_" target="_blank" rel="noopener">@vijyas_artistry_</a></li>
+          <li>Jaipur, Rajasthan</li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-base">© 2026 Vijyaz Studio. Made by hand in Jaipur.</p>
+  </div>
+</footer>
+<a class="whatsapp" href="https://wa.me/918824928835?text=Hi!%20I%27d%20like%20to%20know%20more%20about%20booking%20an%20art%20session." target="_blank" rel="noopener" aria-label="Chat with Vijyaz Studio on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/></svg>
+  <span>WhatsApp us</span>
+</a>
+<script src="main.js"></script>
+</body>
+</html>
