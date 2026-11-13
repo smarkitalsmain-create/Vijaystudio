@@ -26,6 +26,37 @@ if (menuBtn && nav) {
   });
 }
 
+// ----- partnerships submenu -----
+const subBtn = document.querySelector(".sub-btn");
+if (subBtn) {
+  const item = subBtn.parentElement;
+  const setOpen = (open) => {
+    item.classList.toggle("open", open);
+    subBtn.setAttribute("aria-expanded", String(open));
+  };
+  subBtn.addEventListener("click", () => setOpen(!item.classList.contains("open")));
+  document.addEventListener("click", (event) => {
+    if (!item.contains(event.target)) setOpen(false);
+  });
+  item.addEventListener("focusout", (event) => {
+    if (!item.contains(event.relatedTarget)) setOpen(false);
+  });
+  item.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !item.classList.contains("open")) return;
+    setOpen(false);
+    subBtn.focus();
+  });
+  // the mobile menu always lists both links, so there the toggle is only a label
+  const narrow = matchMedia("(max-width: 1140px)");
+  const sync = () => {
+    item.classList.remove("open");
+    subBtn.disabled = narrow.matches;
+    subBtn.setAttribute("aria-expanded", String(narrow.matches));
+  };
+  narrow.addEventListener("change", sync);
+  sync();
+}
+
 // ----- scroll reveal -----
 const revealables = document.querySelectorAll("[data-reveal]");
 if ("IntersectionObserver" in window) {
@@ -54,11 +85,23 @@ document.querySelectorAll(".marquee-track").forEach((track) => {
 });
 
 // ----- registration: audience toggle + preselected program -----
+// e.g. register.html?program=creative-circle-ritual or ?for=venue
 const regForm = document.querySelector("#register-form");
 if (regForm) {
   const program = regForm.elements.program;
-  const teamFields = regForm.querySelectorAll("[data-team-only]");
-  const audienceOf = { "one-on-one": "myself", "diy-kits": "myself", "corporate-workshops": "team", "retreat-offsite": "team" };
+  // anything marked data-audience="team venue" shows only for those audiences
+  const audienceOnly = document.querySelectorAll("[data-audience]");
+  const audienceOf = {
+    "one-on-one": "myself",
+    "diy-kits": "myself",
+    "corporate-workshops": "team",
+    "retreat-offsite": "team",
+    "vijyaz-at-work": "team",
+    "creative-circle-spark": "venue",
+    "creative-circle-ritual": "venue",
+    "creative-circle-collective": "venue",
+    "creative-circle-custom": "venue",
+  };
 
   const applyAudience = (audience) => {
     [...program.options].forEach((opt) => {
@@ -66,15 +109,17 @@ if (regForm) {
       opt.hidden = opt.disabled = audienceOf[opt.value] !== audience;
     });
     if (program.value && audienceOf[program.value] !== audience) program.value = "";
-    teamFields.forEach((el) => {
-      el.hidden = audience !== "team";
-      el.querySelectorAll("input").forEach((input) => (input.disabled = audience !== "team"));
+    audienceOnly.forEach((el) => {
+      const off = !el.dataset.audience.split(" ").includes(audience);
+      el.hidden = off;
+      el.querySelectorAll("input, select").forEach((input) => (input.disabled = off));
     });
   };
 
   const params = new URLSearchParams(location.search);
   const wanted = params.get("program");
-  const audience = audienceOf[wanted] || (params.get("for") === "team" ? "team" : "myself");
+  const asked = params.get("for");
+  const audience = audienceOf[wanted] || (asked === "team" || asked === "venue" ? asked : "myself");
   regForm.elements.audience.value = audience;
   applyAudience(audience);
   if (audienceOf[wanted]) program.value = wanted;
@@ -86,7 +131,7 @@ if (regForm) {
 
 // ----- form submission -----
 const labelFor = (form, field) => {
-  if (field.tagName === "SELECT") return field.selectedOptions[0]?.textContent.trim();
+  if (field.tagName === "SELECT") return field.value && field.selectedOptions[0].textContent.trim();
   if (field.type === "radio") return field.closest("label").textContent.trim();
   return field.value.trim();
 };

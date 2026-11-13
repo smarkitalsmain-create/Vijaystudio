@@ -7,7 +7,9 @@ Plain HTML, CSS and JavaScript with no build step.
 - `index.html` – home
 - `for-you.html` – 1-on-1 sessions and DIY kits
 - `for-teams.html` – corporate workshops, retreats and the playbook
-- `register.html` – registration form
+- `creative-circle.html` – The Creative Circle, annual partnership plans for venues
+- `vijyaz-at-work.html` – Vijyaz at Work, proposal-led workshops for corporate teams
+- `register.html` – registration and enquiry form; `?program=` preselects the interest (for example `creative-circle-ritual` or `vijyaz-at-work`)
 
 Preview locally with `node serve.mjs`, then open http://localhost:4173.
 

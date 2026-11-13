@@ -26,6 +26,13 @@
       <ul>
         <li><a href="for-you.html">For you</a></li>
         <li><a href="for-teams.html">For teams</a></li>
+        <li class="has-sub">
+          <button class="sub-btn" type="button" aria-expanded="false" aria-controls="nav-partnerships">Partnerships</button>
+          <ul class="sub" id="nav-partnerships">
+            <li><a href="creative-circle.html">The Creative Circle</a></li>
+            <li><a href="vijyaz-at-work.html">Vijyaz at Work</a></li>
+          </ul>
+        </li>
         <li><a href="for-you.html#diy-kits">DIY kits</a></li>
         <li><a href="index.html#artist">The artist</a></li>
         <li><a href="register.html">Register</a></li>
@@ -42,7 +49,7 @@
         <p class="eyebrow" style="margin-bottom:0">Registration</p>
         <h1>Let's make <em class="squiggle">something.</em></h1>
         <p class="lede">Tell us about the session you have in mind. We'll follow up with the details and the pricing.</p>
-        <ul class="ticks">
+        <ul class="ticks" data-audience="myself team">
           <li>Led by Vijya, in the room, every time</li>
           <li>All materials included</li>
           <li>No experience needed</li>
@@ -63,13 +70,28 @@
               <div class="segmented">
                 <label><input type="radio" name="audience" value="myself" data-label="Booking for" checked>For myself</label>
                 <label><input type="radio" name="audience" value="team" data-label="Booking for">For my team</label>
+                <label><input type="radio" name="audience" value="venue" data-label="Booking for">For my venue</label>
               </div>
             </fieldset>
             <div class="field"><label for="r-name">Full name *</label><input id="r-name" name="name" data-label="Name" autocomplete="name" required></div>
             <div class="field"><label for="r-phone">Phone *</label><input id="r-phone" name="phone" data-label="Phone" type="tel" autocomplete="tel" required></div>
             <div class="field full"><label for="r-email">Email *</label><input id="r-email" name="email" data-label="Email" type="email" autocomplete="email" required></div>
-            <div class="field" data-team-only hidden><label for="r-company">Company</label><input id="r-company" name="company" data-label="Company" autocomplete="organization"></div>
-            <div class="field" data-team-only hidden><label for="r-size">Team size</label><input id="r-size" name="team_size" data-label="Team size" inputmode="numeric" placeholder="e.g. 25"></div>
+            <div class="field" data-audience="team" hidden><label for="r-company">Company / organisation</label><input id="r-company" name="company" data-label="Company" autocomplete="organization"></div>
+            <div class="field" data-audience="team" hidden><label for="r-size">Team size</label><input id="r-size" name="team_size" data-label="Team size" inputmode="numeric" placeholder="e.g. 25"></div>
+            <div class="field" data-audience="venue" hidden><label for="r-venue">Venue name</label><input id="r-venue" name="venue" data-label="Venue name" autocomplete="organization"></div>
+            <div class="field" data-audience="team venue" hidden><label for="r-city">City</label><input id="r-city" name="city" data-label="City" autocomplete="address-level2"></div>
+            <div class="field" data-audience="venue" hidden>
+              <label for="r-venue-type">Venue type</label>
+              <select id="r-venue-type" name="venue_type" data-label="Venue type">
+                <option value="">Select a venue type</option>
+                <option value="cafe">Café</option>
+                <option value="hospitality">Hospitality venue</option>
+                <option value="event-space">Independent event space</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            <div class="field" data-audience="venue" hidden><label for="r-frequency">Preferred workshop frequency</label><input id="r-frequency" name="frequency" data-label="Preferred workshop frequency" placeholder="e.g. once a month"></div>
+            <div class="field" data-audience="team" hidden><label for="r-occasion">Occasion</label><input id="r-occasion" name="occasion" data-label="Occasion" placeholder="e.g. offsite, team day"></div>
             <div class="field">
               <label for="r-program">Program *</label>
               <select id="r-program" name="program" data-label="Program" required>
@@ -78,6 +100,11 @@
                 <option value="diy-kits">DIY Kits</option>
                 <option value="corporate-workshops">Corporate Workshops</option>
                 <option value="retreat-offsite">Retreat &amp; Offsite</option>
+                <option value="vijyaz-at-work">Vijyaz at Work – Corporate Proposal</option>
+                <option value="creative-circle-spark">Creative Circle – Creative Spark</option>
+                <option value="creative-circle-ritual">Creative Circle – Creative Ritual</option>
+                <option value="creative-circle-collective">Creative Circle – Creative Collective</option>
+                <option value="creative-circle-custom">Creative Circle – Custom Proposal</option>
               </select>
             </div>
             <div class="field"><label for="r-date">Preferred date</label><input id="r-date" name="date" data-label="Preferred date" type="date"></div>
@@ -125,6 +152,13 @@
           <li><a href="for-teams.html#formats">Corporate workshops</a></li>
           <li><a href="for-teams.html#formats">Retreat &amp; offsite</a></li>
           <li><a href="for-teams.html#playbook">Free playbook</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Partnerships</h4>
+        <ul>
+          <li><a href="creative-circle.html">The Creative Circle</a></li>
+          <li><a href="vijyaz-at-work.html">Vijyaz at Work</a></li>
         </ul>
       </div>
       <div>
